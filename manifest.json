@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesej Cinta</title>
+  <link rel="manifest" href="manifest.json">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ffe6f0">
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      background: linear-gradient(to top right, #fff0f5, #ffe6f0);
+      text-align: center;
+      padding: 50px 20px;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    input, button {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.2em;
+      padding: 12px 20px;
+      margin: 10px auto;
+      border-radius: 12px;
+      border: 1px solid #ff99cc;
+      background-color: #ffe6f0;
+      width: 80%;
+      max-width: 300px;
+      display: block;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 1.8em;
+      color: #e60073;
+      animation: fadeIn 1s ease-in-out, floatText 3s infinite alternate;
+      line-height: 1.5em;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes floatText {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    .heart {
+      position: absolute;
+      color: #ff4d88;
+      font-size: 1.5em;
+      animation: float 8s infinite;
+      pointer-events: none;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Masukkan Nama Anda</h2>
+  <input type="text" id="nama" placeholder="Contoh: Mira Rasidi" />
+  <button onclick="tunjukMesej()">Hantar</button>
+
+  <div class="message" id="mesej"></div>
+
+  <script>
+    function tunjukMesej() {
+      const nama = document.getElementById(\"nama\").value.trim();
+      const mesejDiv = document.getElementById(\"mesej\");
+      if (nama) {
+        mesejDiv.innerHTML = `Hi ${nama}, I Love U ❤️<br>Selamat bekerja dan semoga harimu indah ❤️`;
+      } else {
+        mesejDiv.textContent = \"Anda belum masukkan nama!\";
+      }
+    }
+
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      heart.innerHTML = '❤️';
+      document.body.appendChild(heart);
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+
+</body>
+</html>
